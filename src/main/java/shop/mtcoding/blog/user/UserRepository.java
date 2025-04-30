@@ -13,15 +13,27 @@ public class UserRepository {
         return em.find(User.class, id);
     }
 
+    public User save(User user) { // 비영속 객체 (날짜랑 프라이머리키 (PK) 없음!)
+        System.out.println(user.getId()); // 여기선 null
+        em.persist(user); // PK 있는 객체
+        System.out.println(user.getId());
+        return user; // 영속 객체
+    }
 
-    /*
-        1. createNativeQuery -> 기본쿼리
-        2. createQuery -> JPA가 제공해주는 객체지향 쿼리
-        3. NamedQuery -> Query Method는 함수 이름으로 쿼리 생성 - 하지마요!!
-        4. EntityGraph -> 지금 이해못함
-     */
-    public void save(User user) {
-        em.persist(user);
+    public User saveV1(User user) {
+        // 1. insert
+        em.createNativeQuery("INSERT INTO user (username, password, email, created_at) VALUES (?, ?, ?, now())")
+                .setParameter(1, user.getUsername())
+                .setParameter(2, user.getPassword())
+                .setParameter(3, user.getEmail())
+                .executeUpdate();
+
+        // 2. 조회 후 return
+        User result = (User) em.createNativeQuery("SELECT * FROM user WHERE username = ?", User.class)
+                .setParameter(1, user.getUsername())
+                .getSingleResult();
+
+        return result;
     }
 
     public User findByUsername(String username) {
