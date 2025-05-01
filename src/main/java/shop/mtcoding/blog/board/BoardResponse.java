@@ -130,4 +130,20 @@ public class BoardResponse {
         }
     }
 
+    @Data
+    public static class UpdateFormDTO {
+        private Integer id; // PK는 반드시 가져간다.
+        private String title;
+        private String content;
+        private Boolean isPublic;
+
+        public UpdateFormDTO(Board board) {
+            this.id = board.getId();
+            this.title = board.getTitle();
+            this.content = board.getContent();
+            this.isPublic = board.getIsPublic();
+        }
+    }
+
+
 }
