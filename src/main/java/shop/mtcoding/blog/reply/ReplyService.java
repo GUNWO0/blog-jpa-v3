@@ -19,7 +19,7 @@ public class ReplyService {
     }
 
     // 규칙5 : delete는 응답할 데이터가 없다.
-    // TODO : 2단계 RestAPI 주소 변경 JSON 돌려주기 할 때 void 변경하기
+    // TODO : 2단계 RestAPI 주소 변경 json 돌려주기할 때 void 변경하기
     @Transactional
     public void 댓글삭제(Integer id, Integer sessionUserId) {
         Reply replyPS = replyRepository.findById(id)
