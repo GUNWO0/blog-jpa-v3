@@ -21,9 +21,8 @@ public class BoardService {
 
     @Transactional
     public BoardResponse.DTO 글수정하기(BoardRequest.UpdateDTO reqDTO, Integer boardId, Integer sessionUserId) {
-        Board boardPS = boardRepository.findById(boardId);
-
-        if (boardPS == null) throw new Exception404("자원을 찾을 수 없습니다");
+        Board boardPS = boardRepository.findById(boardId)
+                .orElseThrow(() -> new Exception404("자원을 찾을 수 없습니다"));
 
         if (!boardPS.getUser().getId().equals(sessionUserId)) {
             throw new Exception403("권한이 없습니다");
@@ -36,8 +35,8 @@ public class BoardService {
 
     @Transactional
     public void 글삭제(Integer id, Integer sessionUserId) {
-        Board boardPS = boardRepository.findById(id);
-        if (boardPS == null) throw new Exception404("자원을 찾을 수 없습니다");
+        Board boardPS = boardRepository.findById(id)
+                .orElseThrow(() -> new Exception404("자원을 찾을 수 없습니다"));
         if (!boardPS.getUser().getId().equals(sessionUserId)) {
             throw new Exception403("권한이 없습니다");
         }
@@ -81,13 +80,13 @@ public class BoardService {
 
 
     // 규칙 4. 화면에 보이는 데이터 + 반드시 PK는 포함되어야 한다.
-    public BoardResponse.UpdateFormDTO 업데이트글보기(int id, Integer sessionUserId) {
-        Board boardPS = boardRepository.findById(id);
-        if (boardPS == null) throw new Exception404("자원을 찾을 수 없습니다");
+    public BoardResponse.DTO 글보기(int id, Integer sessionUserId) {
+        Board boardPS = boardRepository.findById(id)
+                .orElseThrow(() -> new Exception404("자원을 찾을 수 없습니다"));
 
         if (!boardPS.getUser().getId().equals(sessionUserId)) {
             throw new Exception403("권한이 없습니다");
         }
-        return new BoardResponse.UpdateFormDTO(boardPS);
+        return new BoardResponse.DTO(boardPS);
     }
 }

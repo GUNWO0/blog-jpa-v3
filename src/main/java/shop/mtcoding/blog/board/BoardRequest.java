@@ -15,14 +15,14 @@ public class BoardRequest {
         private String title;
         @NotEmpty(message = "내용을 입력하세요")
         private String content;
-        private String isPublic;
+        private Boolean isPublic;
 
         public Board toEntity(User user) {
             return Board.builder()
                     .title(title)
                     .content(content)
-                    .isPublic(isPublic == null ? false : true)
-                    .user(user) // user객체 필요
+                    .isPublic(isPublic)
+                    .user(user) // user 객체 필요
                     .build();
         }
     }
@@ -33,14 +33,14 @@ public class BoardRequest {
         private String title;
         @NotEmpty(message = "내용을 입력하세요")
         private String content;
-        private String isPublic;
+        private boolean isPublic;
 
         public Board toEntity(User user) {
             return Board.builder()
                     .title(title)
                     .content(content)
-                    .isPublic(isPublic == null ? false : true)
-                    .user(user) // user객체 필요
+                    .isPublic(isPublic)
+                    .user(user) // user 객체 필요
                     .build();
         }
     }
