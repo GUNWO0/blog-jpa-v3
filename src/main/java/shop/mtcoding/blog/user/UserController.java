@@ -18,7 +18,10 @@ public class UserController {
     private final UserService userService;
     private final HttpSession session;
 
-    @PutMapping("/user")
+    // API가 붙으면 json 리턴
+    // 인증이 필요하면 주소에 s 붙이기
+    // 회원가입, 로그인, 로그아웃은 아무것도 적지 않는다 주소만 적는다
+    @PutMapping("/s/api/user")
     public String update(@Valid @RequestBody UserRequest.UpdateDTO updateDTO, Errors errors) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // TODO : JWT 이후에
