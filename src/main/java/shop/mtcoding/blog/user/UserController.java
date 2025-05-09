@@ -1,6 +1,5 @@
 package shop.mtcoding.blog.user;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -45,24 +44,10 @@ public class UserController {
 
     // TODO : JWT 이후에
     @PostMapping("/login")
-    public String login(@Valid @RequestBody UserRequest.LoginDTO loginDTO, Errors errors, HttpServletResponse response) {
-        //System.out.println(loginDTO);
-        User sessionUser = userService.로그인(loginDTO);
-        session.setAttribute("sessionUser", sessionUser);
+    public @ResponseBody Resp<?> login(@Valid @RequestBody UserRequest.LoginDTO loginDTO, Errors errors, HttpServletResponse response) {
+        UserResponse.TokenDTO respDTO = userService.로그인(loginDTO);
 
-        if (loginDTO.getRememberMe() == null) {
-            Cookie cookie = new Cookie("username", null);
-            cookie.setMaxAge(0); // 즉시 만료
-            response.addCookie(cookie);
-        } else {
-            Cookie cookie = new Cookie("username", loginDTO.getUsername());
-            cookie.setMaxAge(60 * 60 * 24 * 7);
-            response.addCookie(cookie);
-        }
-        System.out.println("로그인 요청 username: " + loginDTO.getUsername());
-        System.out.println("로그인 요청 password: " + loginDTO.getPassword());
-
-        return "redirect:/";
+        return Resp.ok(respDTO);
     }
 
     // TODO : JWT 이후에
