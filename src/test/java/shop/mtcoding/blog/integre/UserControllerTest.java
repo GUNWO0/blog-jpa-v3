@@ -12,12 +12,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.blog._core.util.JwtUtil;
 import shop.mtcoding.blog.user.User;
 import shop.mtcoding.blog.user.UserRequest;
 
 import static org.hamcrest.Matchers.matchesPattern;
 
+@Transactional
 // 컨트롤러 통합 테스트
 @AutoConfigureMockMvc // MockMvc 클래스가 IoC에 로드 | RestTemplate -> 자바스크립트의 fetch와 동일, 진짜 환경에 요청 가능
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK) // MOCK -> 가짜 환경을 만들어 필요한 의존관계를 다 메모리에 올려서 테스트
