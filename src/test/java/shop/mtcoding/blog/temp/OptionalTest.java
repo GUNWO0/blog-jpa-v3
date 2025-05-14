@@ -15,7 +15,6 @@ ifPresent(Consumer)	값이 있으면 처리
 filter(Predicate)	조건에 맞는 값만 유지
  */
 
-
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -25,30 +24,32 @@ public class OptionalTest {
     @Test
     public void t1() {
         String name = "metacoding";
-        Optional<String> opt = Optional.ofNullable(name); // null을 처리하는 선물박스
+        Optional<String> opt = Optional.of(name);
 
         if (opt.isPresent()) {
             System.out.println(opt.get());
         } else {
-            System.out.println("선물 박스에 값이 없어요");
+            System.out.println("선물박스에 값이 없어요");
         }
     }
 
     @Test
     public void t2() {
         String name = null;
-        Optional<String> opt = Optional.ofNullable(name); // null을 처리하는 선물박스
+        Optional<String> opt = Optional.ofNullable(name);
 
         String result = opt.orElseThrow(() -> new RuntimeException("값이 없어요"));
         System.out.println(result);
+
     }
 
     @Test
     public void t3() {
         String name = null;
-        Optional<String> opt = Optional.ofNullable(name); // null을 처리하는 선물박스
+        Optional<String> opt = Optional.ofNullable(name);
 
         String result = opt.orElseGet(() -> "metacoding");
         System.out.println(result);
+
     }
 }

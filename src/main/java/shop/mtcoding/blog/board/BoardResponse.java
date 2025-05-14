@@ -46,6 +46,7 @@ public class BoardResponse {
             this.boards = boards.stream().map(board -> new DTO(board)).toList();
             this.prev = current - 1;
             this.next = current + 1;
+            this.current = current;
             this.size = 3;
             this.totalCount = totalCount; // given
             this.totalPage = makeTotalPage(totalCount, size); // 2
@@ -129,4 +130,5 @@ public class BoardResponse {
             this.replies = repliesDTO;
         }
     }
+
 }

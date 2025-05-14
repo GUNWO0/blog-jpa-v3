@@ -17,7 +17,7 @@ public class UserResponse {
         }
     }
 
-    // 규칙2 : DTO에 민감정보 빼기, 날짜는 String으로!! (날짜 공부하기 전까지)
+    // 규칙2 : DTO에 민감정보 빼기, 날짜는 String으로!! (날짜 공부하기전까지)
     @Data
     public static class DTO {
         private Integer id;
@@ -27,7 +27,7 @@ public class UserResponse {
 
         public DTO(User user) {
             this.id = user.getId();
-            this.username = getUsername();
+            this.username = user.getUsername();
             this.email = user.getEmail();
             this.createdAt = user.getCreatedAt().toString();
         }

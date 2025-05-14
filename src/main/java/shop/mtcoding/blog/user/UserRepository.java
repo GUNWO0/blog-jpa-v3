@@ -15,11 +15,9 @@ public class UserRepository {
         return Optional.ofNullable(em.find(User.class, id));
     }
 
-    public User save(User user) { // 비영속 객체 (날짜랑 프라이머리키 (PK) 없음!)
-        System.out.println(user.getId()); // 여기선 null
-        em.persist(user); // PK 있는 객체
-        System.out.println(user.getId());
-        return user; // 영속 객체
+    public User save(User user) {
+        em.persist(user);
+        return user; // 영속객체
     }
 
     public User saveV1(User user) {

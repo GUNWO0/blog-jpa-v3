@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-
+ 
 @RequiredArgsConstructor
 @Repository
 public class LoveRepository {

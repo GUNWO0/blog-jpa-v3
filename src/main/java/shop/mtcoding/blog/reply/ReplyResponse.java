@@ -10,7 +10,7 @@ public class ReplyResponse {
         private String content;
         private Integer userId;
         private Integer boardId;
-        private String createdAt;
+        private String createdAt; // 날짜는 String으로 리턴한다 (날짜 타입 공부하기 전까지)
 
         public DTO(Reply reply) {
             this.id = reply.getId();
